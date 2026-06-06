@@ -1,0 +1,12 @@
+profile,file,min_price,max_price,mean_price
+flat_low,experiments/smart_charging_ev60/price_profiles/flat_low.csv,0.1,0.1,0.1
+flat_medium,experiments/smart_charging_ev60/price_profiles/flat_medium.csv,0.2,0.2,0.2
+flat_high,experiments/smart_charging_ev60/price_profiles/flat_high.csv,0.3,0.3,0.3
+evening_peak,experiments/smart_charging_ev60/price_profiles/evening_peak.csv,0.1,0.45,0.2375
+midday_low_evening_high,experiments/smart_charging_ev60/price_profiles/midday_low_evening_high.csv,0.1,0.45,0.24166666666666667
+night_low,experiments/smart_charging_ev60/price_profiles/night_low.csv,0.1,0.35,0.18
+high_low_high,experiments/smart_charging_ev60/price_profiles/high_low_high.csv,0.1,0.3,0.25
+low_high_low,experiments/smart_charging_ev60/price_profiles/low_high_low.csv,0.1,0.45,0.1875
+random_tou_01,experiments/smart_charging_ev60/price_profiles/random_tou_01.csv,0.1,0.3,0.21666666666666665
+random_tou_02,experiments/smart_charging_ev60/price_profiles/random_tou_02.csv,0.1,0.45,0.20000000000000004
+random_tou_03,experiments/smart_charging_ev60/price_profiles/random_tou_03.csv,0.2,0.45,0.30833333333333335

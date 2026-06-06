@@ -24,6 +24,12 @@ This repository contains the modified BEAM files and experiment configuration fo
 - `test/input/smart-charging/price.csv`
   - Input price profile used by the response model
 
+- `experiments/smart_charging_ev60/`
+  - EV60 price profile experiments and generation script
+
+- `plot_household_smart_charging_figures.py.ipynb`
+  - Analysis and figure generation notebook
+
 ## Current status
 
 The current implementation supports:

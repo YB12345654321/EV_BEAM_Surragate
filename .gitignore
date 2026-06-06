@@ -1,0 +1,35 @@
+# Build artifacts
+build/
+.gradle/
+output/
+
+# Debug logs
+*.log
+gc_*.log
+heap-detail_*.log
+smart_run*.log
+log-path_IS_UNDEFINED/
+
+# Simulation outputs (regenerable)
+smart_charging_decisions*.csv
+smart_charging_events*.txt
+household_load_*.csv
+sf1k_household_load_*.csv
+smart_charging_load*.csv
+smart_charging_energy_validation.csv
+household_energy_validation_sessions.csv
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# BEAM network binaries (download separately from upstream BEAM)
+test/input/**/r5/osm.mapdb
+test/input/**/r5/osm.mapdb.p
+test/input/**/r5/network.dat
+test/input/**/r5/physsim-network.xml
+
+# Backup source files
+*.bak

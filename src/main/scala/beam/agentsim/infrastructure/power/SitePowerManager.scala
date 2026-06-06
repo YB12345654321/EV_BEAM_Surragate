@@ -254,11 +254,6 @@ class SitePowerManager(chargingNetworkHelper: ChargingNetworkHelper, beamService
     maxCycleDuration: Int,
     chargingVehicle: ChargingVehicle
   ): ChargingCycle = {
-    println(
-      s"DISPATCH_ENTER tick=$cycleStartTime vehicle=${chargingVehicle.vehicle.id} " +
-      s"parkingType=${chargingVehicle.stall.parkingType} activityType=${chargingVehicle.activityType} " +
-      s"arrival=${chargingVehicle.arrivalTime} estimatedDeparture=${chargingVehicle.estimatedDepartureTime}"
-    )
     val vehicle = chargingVehicle.vehicle
     val constrainedPowerAtZoneLevel = getPowerFromZoneLimit(chargingVehicle.stall)
     val rawPowerLimit =
@@ -354,15 +349,6 @@ class SitePowerManager(chargingNetworkHelper: ChargingNetworkHelper, beamService
       estimatedDeparture = chargingVehicle.estimatedDepartureTime
     )
 
-    println(
-      s"SMART_CHARGING tick=$cycleStartTime vehicle=${vehicle.id} household=$isHouseholdHomeCharging " +
-      s"parkingType=${chargingVehicle.stall.parkingType} activityType=${chargingVehicle.activityType} " +
-      s"price=$currentPrice decision=${smartChargingDecision.reason} " +
-      s"duration=$duration rawPowerKW=$rawPowerLimit finalPowerKW=$constrainedPowerAtVehicleLevel socJ=${vehicle.primaryFuelLevelInJoules} " +
-      s"socRatio=${smartChargingDecision.socRatio} deficitJ=${smartChargingDecision.deficitJ} " +
-      s"targetJ=${smartChargingDecision.targetJ} capacityJ=${smartChargingDecision.capacityJ} " +
-      s"estimatedDeparture=${chargingVehicle.estimatedDepartureTime}"
-    )
     val (chargingDuration, energyToCharge) = vehicle.refuelingSessionDurationAndEnergyInJoules(
       sessionDurationLimit = Some(duration),
       stateOfChargeLimit = None,
