@@ -1,0 +1,62 @@
+package beam.agentsim.agents.pricing
+
+import beam.agentsim.agents.vehicles.BeamVehicle
+
+object HouseholdSmartChargingManager {
+
+  final case class Decision(
+    shouldCharge: Boolean,
+    reason: String,
+    powerMultiplier: Double,
+    socRatio: Double,
+    deficitJ: Double,
+    targetJ: Double,
+    capacityJ: Double
+  )
+
+  val TargetSocFraction: Double = 0.80
+  val ReferencePrice: Double = 0.25
+  val PriceTolerance: Double = 0.00
+
+  def decide(
+    vehicle: BeamVehicle,
+    maxPowerKW: Double,
+    timeToDepartureSeconds: Int,
+    timestepSeconds: Int,
+    currentPrice: Double
+  ): Decision = {
+
+    val capacityJ = vehicle.beamVehicleType.primaryFuelCapacityInJoule
+    val currentJ = vehicle.primaryFuelLevelInJoules
+    val targetJ = TargetSocFraction * capacityJ
+    val deficitJ = math.max(0.0, targetJ - currentJ)
+
+    val remainingAfterThisStep =
+      math.max(0, timeToDepartureSeconds - timestepSeconds)
+
+    val maxFutureEnergyJ =
+      maxPowerKW * 1000.0 * remainingAfterThisStep
+
+    val urgentByEnergy =
+      deficitJ > maxFutureEnergyJ
+
+    val urgentByTime =
+      timeToDepartureSeconds <= 3600
+
+    val urgent =
+      urgentByEnergy || urgentByTime
+
+    val priceAcceptable =
+      currentPrice <= ReferencePrice * (1.0 + PriceTolerance)
+
+    if (deficitJ <= 0.0) {
+      Decision(false, "target_soc_reached", 0.0, currentJ / capacityJ, deficitJ, targetJ, capacityJ)
+    } else if (urgent) {
+      Decision(true, "urgent", 1.0, currentJ / capacityJ, deficitJ, targetJ, capacityJ)
+    } else if (priceAcceptable) {
+      Decision(true, "price_acceptable", 1.0, currentJ / capacityJ, deficitJ, targetJ, capacityJ)
+    } else {
+      Decision(false, "wait_price_high", 0.0, currentJ / capacityJ, deficitJ, targetJ, capacityJ)
+    }
+  }
+}
