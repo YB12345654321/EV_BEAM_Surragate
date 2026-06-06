@@ -174,12 +174,13 @@ EOF
   echo "${profile_name},success,${rc},${elapsed},${out_dir}" >> "${SUMMARY_CSV}"
 }
 
-mapfile -t profiles < <(find "${PRICE_DIR}" -maxdepth 1 -name '*.csv' | sort)
-echo "Found ${#profiles[@]} csv files in ${PRICE_DIR}"
-
-for profile_path in "${profiles[@]}"; do
+profile_count=0
+for profile_path in "${PRICE_DIR}"/*.csv; do
+  [[ -f "${profile_path}" ]] || continue
+  profile_count=$((profile_count + 1))
   run_profile "${profile_path}"
 done
+echo "Processed ${profile_count} csv files in ${PRICE_DIR}"
 
 echo "Building surrogate training table ..."
 (
