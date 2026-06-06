@@ -12,6 +12,10 @@ log-path_IS_UNDEFINED/
 
 # Simulation outputs (regenerable)
 smart_charging_decisions*.csv
+experiments/smart_charging_ev60/runs/*/
+!experiments/smart_charging_ev60/runs/.gitkeep
+experiments/smart_charging_ev60/surrogate/datasets/*.csv
+!experiments/smart_charging_ev60/surrogate/datasets/.gitkeep
 smart_charging_events*.txt
 household_load_*.csv
 sf1k_household_load_*.csv
@@ -21,6 +25,10 @@ household_energy_validation_sessions.csv
 
 # Jupyter
 .ipynb_checkpoints/
+analysis/.ipynb_checkpoints/
+
+# Analysis outputs (regenerable from notebook)
+# Keep committed figures; ignore future scratch outputs if needed
 
 # macOS
 .DS_Store
