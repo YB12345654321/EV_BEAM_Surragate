@@ -1,0 +1,4 @@
+case,household_rows,household_vehicles,active_rows,active_vehicles,energy_kwh,max_load_kw,price_acceptable,wait_price_high,urgent
+low,12379,84,48,20,14.860916666666668,9.5,42,0,6
+high,10573,72,752,13,9.518722222222223,11.8,11,716,25
+dynamic,7523,49,134,9,8.548555555555556,31.1,27,103,4
